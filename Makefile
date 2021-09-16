@@ -1,6 +1,6 @@
 NAME=unicreds
 ARCH=$(shell uname -m)
-VERSION=1.7.0
+VERSION=$(grep Version src/unicreds/main.go | sed 's/.*"\(.*\)".*/\1/')
 GO15VENDOREXPERIMENT := 1
 ITERATION := 1
 
@@ -12,7 +12,7 @@ integration:
 
 compile:
 	@rm -rf build/
-	@gox -ldflags "-X main.Version=$(VERSION)" \
+	@gox \
 	-osarch="darwin/amd64" \
 	-osarch="linux/amd64" \
 	-osarch="windows/amd64" \
